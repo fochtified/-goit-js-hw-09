@@ -1,31 +1,47 @@
-//Korzystając z delegowania, śledź zdarzenie input w formularzu i za każdym razem zapisuj obiekt z polami email i message
-//do pamięci lokalnej, w której przechowywane są bieżące wartości pól formularza.
+//declaring consts
+const feedbackForm = document.querySelector(`form.form-feedback`);
+const userEmail = document.querySelector(`form.form-feedback > label > input`);
+const userMessage = document.querySelector(
+    `form.form-feedback > label > textarea`
+);
+const storageKey = "feedback-form-state";
 
-//Niech kluczem dla magazynu będzie ciąg „feedback-form-state”.
+//loading saved data from local
+const savedFormData = JSON.parse(localStorage.getItem(storageKey)) ?? {};
+userEmail.value = savedFormData.email ?? ``;
+userMessage.value = savedFormData.message ?? ``;
 
-//Po załadowaniu strony sprawdź stan pamięci, a jeśli są tam przechowywane dane, wypełnij nimi pola formularza.
+//saving input data to local
+feedbackForm.addEventListener("input", (event) => {
+    const { name, value } = event.target;
+    const formData = JSON.parse(localStorage.getItem(storageKey)) ?? {};
+    formData[name] = value.trim();
+    localStorage.setItem(storageKey, JSON.stringify(formData));
+});
 
-//W przeciwnym razie pola powinny być puste.
+//form submission
+function handleFormSubmit(event) {
+    event.preventDefault();
+    if (
+        event.target.elements.email.value.trim() === "" ||
+        event.target.elements.message.value.trim() === ""
+    ) {
+        console.log("Not sufficient data to proceed");
+        return alert("Make sure all fields are filled in to continue");
+    }
+    console.log("Submit successful");
+    console.log({
+        email: event.target.elements.email.value.trim(),
+        message: event.target.elements.message.value.trim(),
+    });
+    feedbackForm.reset();
+    localStorage.removeItem(storageKey);
+    alert(
+        `Your message has been submitted successfully. Thank you for your feedback.`
+    );
+}
 
-//Podczas submitu formularza wyczyść pamięć formularza i pola,
+//form submit listener
+feedbackForm.addEventListener("submit", handleFormSubmit);
 
-//a następnie wyświetl w konsoli obiekt z polami e-mail, message i ich aktualnymi wartościami.
-
-//Formularz nasłuchuje zdarzeń input i submit.
-
-//Podczas wprowadzania danych do dowolnego elementu formularza, są one zapisywane do lokalnej pamięci pod kluczem "feedback-form-state".
-
-//Zapisane dane nie zawierają spacji wokół krawędzi.
-
-//Wprowadzanie danych w jednym polu formularza nie usuwa danych w pamięci dla innego pola.
-
-//Podczas odświeżania strony dane z pamięci lokalnej są zastępowane do elementów formularza.
-
-//W polach formularza nie ma undefined.
-
-//Podczas submitu formularza sprawdzane jest, czy oba elementy formularza są wypełnione.
-
-//Podczas wysyłania formularza, jeśli oba elementy formularza są wypełnione, obiekt z polami email, message i ich aktualnymi wartościami
-//jest wyświetlany w konsoli, a pamięć i pola formularza są czyszczone.
-
-//Jeśli wprowadzisz dane do dowolnego elementu formularza po submicie, dane z poprzedniego formularza nie pojawią się w pamięci lokalnej.
+//looks about right?
