@@ -27,3 +27,8 @@ ul {
 .gallery-image:hover {
     transform: scale(1.04);
 }
+
+.galleryLightbox {
+    background: rgba(46, 47, 66, 0.8);
+    color: #fff;
+}

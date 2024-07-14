@@ -1,4 +1,9 @@
 "use strict";
+//CHANGES 09: installing SLB lib via npm... and potentially done
+
+//CHANGES 09: importing SLB
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 // table of contents
 const images = [
@@ -71,6 +76,7 @@ const images = [
 const galleryList = document.querySelector(".gallery");
 
 //creating li elements
+//CHANGES 09: deleted "data-source="${original}"
 const galleryItems = images
     .map(
         ({ preview, description, original }) =>
@@ -79,7 +85,6 @@ const galleryItems = images
   <img
     class="gallery-image"
     src="${preview}"
-    data-source="${original}"
     alt="${description}"
   />
 </a>
@@ -91,29 +96,16 @@ const galleryItems = images
 //putting created li elements in the right place
 galleryList.insertAdjacentHTML("afterbegin", galleryItems);
 
-//EVERYTHING 5-9 OVER HERE (*＾▽＾)／
-//event listener with delegation
-galleryList.addEventListener("click", (event) => {
-    event.preventDefault();
+//CHANGES 09: deleted basicLightbox with delegation
+//CHANGES 09: adding SLB instance
 
-    if (event.target.tagName !== "IMG") {
-        console.log("Sorry, not an image");
-        return;
-    } else {
-        const originalUrl = event.target.dataset.source;
-        console.log(originalUrl);
-
-        // instance of basicLightbox
-        const instance = basicLightbox.create(`
-      <img src="${originalUrl}" width="1112" height="640">
-    `);
-        instance.show();
-
-        // ESC listener
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-                instance.close();
-            }
-        });
-    }
+new SimpleLightbox(".gallery a", {
+    className: "galleryLightbox",
+    overlay: true,
+    captions: true,
+    captionsData: "alt",
+    captionDelay: 250,
+    scrollZoom: true,
+    close: true,
+    doubleTapZoom: 2,
 });
