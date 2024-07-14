@@ -6,12 +6,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gallery</title>
         
-      <link rel="stylesheet" href="/goit-js-hw-09/assets/styles-86cca6d9.css">
+        <link
+            href="
+https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css
+"
+            rel="stylesheet"
+        />
+      <script type="module" crossorigin src="/goit-js-hw-09/commonHelpers.js"></script>
+      <link rel="modulepreload" crossorigin href="/goit-js-hw-09/assets/modulepreload-polyfill-3cfb730f.js">
+      <link rel="stylesheet" href="/goit-js-hw-09/assets/styles-bacb7c8e.css">
     </head>
     <body>
-        <section class="go-home trans-link">
-            <a href="./index.html">Go to home</a>
-            <!-- <h1>Gallery</h1> -->
+        <section>
+            <div class="main-container">
+                <a href="./index.html" class="go-home trans-link">Go to home</a>
+                <!-- <h1>Gallery</h1> -->
+                <ul class="gallery"></ul>
+                <script src="
+https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js
+"></script>
+                
+            </div>
         </section>
     </body>
 </html>
