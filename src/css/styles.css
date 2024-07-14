@@ -30,21 +30,13 @@
     margin-left: 75px;
 }
 
-.trans-link {
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.trans-js {
-    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.trans-js:hover {
-    transform: rotate(180deg);
+.main-container {
+    max-width: 1128px;
+    margin: 0 auto;
 }
 
 .go-home {
     padding: 20px 0;
-    margin-right: 75px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -57,4 +49,16 @@
 .go-home:hover,
 .go-home:focus {
     color: #747bff;
+}
+
+.trans-link {
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trans-js {
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trans-js:hover {
+    transform: rotate(180deg);
 }
